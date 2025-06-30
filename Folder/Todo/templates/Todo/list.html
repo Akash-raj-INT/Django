@@ -1,0 +1,23 @@
+<div style="min-height: 100vh; background: #f8f9fa; padding: 40px 0; display: flex; flex-direction: column; align-items: center;">
+  <div style="font-size: 2.2em; font-weight: 700; color: #222; margin-bottom: 32px; letter-spacing: 2px;">Todo List</div>
+  <ul style="list-style-type: none; padding: 0; width: 100%; max-width: 540px;">
+    {% for todo in todos %}
+    <li style="margin-bottom: 32px; padding: 32px 28px; border: 1px solid #e0e0e0; border-radius: 16px; background: #fff; box-shadow: 0 4px 16px rgba(0,0,0,0.06); display: flex; flex-direction: column; align-items: center;">
+      <span style="font-size: 1.1em; color: #888; margin-bottom: 8px; letter-spacing: 1px;">Title:</span>
+      <h2 style="color: #222; font-size: 2em; margin-bottom: 12px; letter-spacing: 1px; font-weight: 600;">{{ todo.title }}</h2>
+      <span style="font-size: 1em; color: #888; margin-bottom: 8px; align-self: flex-start;">Description:</span>
+      <div style="font-size: 1.1em; color: #444; margin-bottom: 16px; align-self: flex-start;">{{ todo.description }}</div>
+      <span style="font-size: 1em; color: #888; margin-bottom: 8px; align-self: flex-start;">Is active:</span>
+      <div style="font-size: 1.1em; color: #444; margin-bottom: 18px; align-self: flex-start;">{{ todo.is_active|yesno:"Yes,No" }}</div>
+      <div style="display: flex; gap: 28px; margin-bottom: 10px;">
+        <a href="{% url 'todo_update' todo.pk %}" style="color: #007bff; text-decoration: none; font-weight: 600; font-size: 1.1em;">Edit</a>
+        <span style="color: #bbb; font-size: 1.1em;">|</span>
+        <a href="{% url 'todo_delete' todo.pk %}" style="color: #dc3545; text-decoration: none; font-weight: 600; font-size: 1.1em;">Delete</a>
+      </div>
+    </li>
+    {% empty %}
+    <li><h2 style="color: #888; font-size: 1.3em;">No Data Found</h2></li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'todo_create' %}" style="background-color: #28a745; color: white; padding: 14px 36px; text-decoration: none; border-radius: 10px; font-size: 1.2em; font-weight: 600; box-shadow: 0 2px 8px rgba(40,167,69,0.10); transition: background 0.2s; margin-top: 32px;">Create New Todo</a>
+</div>
