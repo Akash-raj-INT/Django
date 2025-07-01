@@ -1,0 +1,36 @@
+{% extends 'library/base.html' %}
+
+{% block content %}
+<h2>Fine Records</h2>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Member</th>
+            <th>Book</th>
+            <th>Amount</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fine in fines %}
+        <tr>
+            <td>{{ fine.loan.member.name }}</td>
+            <td>{{ fine.loan.book.title }}</td>
+            <td>₹{{ fine.amount }}</td>
+            <td>
+                {% if fine.paid %}
+                    <span class="badge bg-success">Paid</span>
+                {% else %}
+                    <span class="badge bg-warning">Unpaid</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="text-center">No fines found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %} 
